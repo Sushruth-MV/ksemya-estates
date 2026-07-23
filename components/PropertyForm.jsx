@@ -279,24 +279,15 @@ export default function PropertyForm({ existing = null }) {
           <input name="nearest_landmark" value={form.nearest_landmark} onChange={handleChange} className={inputClass} />
         </div>
 
-        <div className="md:col-span-2 flex items-center gap-3 bg-forest border border-cream/10 rounded-sm px-4 py-3">
-          <button
-            type="button"
-            onClick={() => setForm({ ...form, price_negotiable: !form.price_negotiable })}
-            role="switch"
-            aria-checked={form.price_negotiable}
-            className={`w-10 h-5 rounded-full relative transition-colors ${
-              form.price_negotiable ? "bg-gold" : "bg-cream/15"
-            }`}
-          >
-            <span
-              className={`absolute top-0.5 w-4 h-4 bg-cream rounded-full transition-transform ${
-                form.price_negotiable ? "translate-x-5" : "translate-x-0.5"
-              }`}
-            />
-          </button>
+        <label className="md:col-span-2 flex items-center gap-3 bg-forest border border-cream/10 rounded-sm px-4 py-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={form.price_negotiable}
+            onChange={(e) => setForm({ ...form, price_negotiable: e.target.checked })}
+            className="w-5 h-5 rounded accent-gold cursor-pointer"
+          />
           <span className="text-sm text-cream/80">Price Negotiable</span>
-        </div>
+        </label>
 
         <div className="md:col-span-2">
           <label className={labelClass}>YouTube Video URL</label>
@@ -352,24 +343,15 @@ export default function PropertyForm({ existing = null }) {
           )}
         </div>
 
-        <div className="md:col-span-2 flex items-center gap-3 bg-gold/10 border border-gold/30 rounded-sm px-4 py-3">
-          <button
-            type="button"
-            onClick={() => setForm({ ...form, is_featured: !form.is_featured })}
-            role="switch"
-            aria-checked={form.is_featured}
-            className={`w-10 h-5 rounded-full relative transition-colors ${
-              form.is_featured ? "bg-gold" : "bg-cream/15"
-            }`}
-          >
-            <span
-              className={`absolute top-0.5 w-4 h-4 bg-cream rounded-full transition-transform ${
-                form.is_featured ? "translate-x-5" : "translate-x-0.5"
-              }`}
-            />
-          </button>
+        <label className="md:col-span-2 flex items-center gap-3 bg-gold/10 border border-gold/30 rounded-sm px-4 py-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={form.is_featured}
+            onChange={(e) => setForm({ ...form, is_featured: e.target.checked })}
+            className="w-5 h-5 rounded accent-gold cursor-pointer"
+          />
           <span className="text-sm text-cream/80">Show in homepage carousel (Featured)</span>
-        </div>
+        </label>
       </div>
 
       {error && <p className="text-sm text-red-400">{error}</p>}

@@ -98,23 +98,15 @@ export default function AdminPropertiesList() {
                   <p className="text-xs text-cream/50 mb-2">{p.type}</p>
                   <p className="text-gold font-semibold mb-3">{formatPrice(p.price)}</p>
 
-                  <div className="flex items-center gap-3 mb-4">
-                    <button
-                      onClick={() => toggleFeatured(p)}
-                      role="switch"
-                      aria-checked={p.is_featured}
-                      className={`w-10 h-5 rounded-full relative transition-colors shrink-0 ${
-                        p.is_featured ? "bg-gold" : "bg-cream/15"
-                      }`}
-                    >
-                      <span
-                        className={`absolute top-0.5 w-4 h-4 bg-cream rounded-full transition-transform ${
-                          p.is_featured ? "translate-x-5" : "translate-x-0.5"
-                        }`}
-                      />
-                    </button>
+                  <label className="flex items-center gap-2 mb-4 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={p.is_featured}
+                      onChange={() => toggleFeatured(p)}
+                      className="w-4 h-4 rounded accent-gold cursor-pointer"
+                    />
                     <span className="text-xs text-cream/50">Featured</span>
-                  </div>
+                  </label>
 
                   <div className="mt-auto flex items-center justify-between pt-3 border-t border-cream/10">
                     <Link
