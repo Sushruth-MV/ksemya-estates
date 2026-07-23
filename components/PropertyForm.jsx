@@ -106,14 +106,27 @@ export default function PropertyForm({ existing = null }) {
     setSaving(true);
     setError("");
 
+    // Built explicitly (not spread from `form`) so DB-only columns that
+    // aren't part of this form — lat, lng, id, created_at, owner_id, etc. —
+    // never get sent back in the update and can't collide with their column
+    // types (e.g. "" into a numeric column).
     const payload = {
-      ...form,
+      title: form.title,
+      description: form.description,
+      type: form.type,
       price: form.price ? Number(form.price) : null,
+      area: form.area,
+      location: form.location,
+      district: form.district,
+      status: form.status,
+      youtube_url: form.youtube_url,
+      is_featured: form.is_featured,
       survey_number: form.survey_number || null,
       khata_type: form.khata_type || null,
       facing: form.facing || null,
       road_width: form.road_width || null,
       nearest_landmark: form.nearest_landmark || null,
+      price_negotiable: form.price_negotiable,
     };
 
     let propertyId = existing?.id;
