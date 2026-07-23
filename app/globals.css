@@ -7,13 +7,13 @@ html {
 }
 
 body {
-  background-color: #1c262b;
-  color: #f4efe6;
+  background-color: #0e1310;
+  color: #f3efe5;
 }
 
 /* Visible keyboard focus everywhere — accessibility floor */
 :focus-visible {
-  outline: 2px solid #c49a4a;
+  outline: 2px solid #c9a86a;
   outline-offset: 2px;
 }
 
@@ -28,16 +28,16 @@ body {
 
 /* Faint contour-line texture, evoking hillside estate boundaries */
 .contour-bg {
-  background-image: radial-gradient(circle at 20% 20%, rgba(196, 154, 74, 0.06) 0, transparent 45%),
-    radial-gradient(circle at 80% 60%, rgba(196, 154, 74, 0.05) 0, transparent 40%);
+  background-image: radial-gradient(circle at 20% 20%, rgba(201, 168, 106, 0.06) 0, transparent 45%),
+    radial-gradient(circle at 80% 60%, rgba(201, 168, 106, 0.05) 0, transparent 40%);
 }
 
 /* Frosted glass panel used for cards, form containers, floating badges */
 .glass-panel {
-  background: rgba(38, 49, 55, 0.6);
+  background: rgba(27, 36, 32, 0.6);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(244, 239, 230, 0.08);
+  border: 1px solid rgba(243, 239, 229, 0.08);
 }
 
 /* Nav / footer link with a gold underline that grows in on hover */
@@ -51,7 +51,7 @@ body {
   bottom: -3px;
   width: 0;
   height: 1px;
-  background: #c49a4a;
+  background: #c9a86a;
   transition: width 0.3s ease;
 }
 .link-underline:hover::after {

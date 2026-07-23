@@ -29,7 +29,22 @@ const labelClass = "block text-sm text-cream/60 mb-1";
 
 export default function PropertyForm({ existing = null }) {
   const router = useRouter();
-  const [form, setForm] = useState(existing || EMPTY);
+  // property_images is a joined array, not a column on `properties` — keep
+  // it out of the form state so it never gets spread into the update payload.
+  const { property_images: initialImages, ...existingFields } = existing || {};
+  const [form, setForm] = useState(() => {
+    if (!existing) return EMPTY;
+    // Nullable DB columns (optional fields) must become "" for controlled inputs.
+    const normalized = { ...existingFields };
+    Object.keys(normalized).forEach((key) => {
+      if (normalized[key] === null) normalized[key] = "";
+    });
+    return normalized;
+  });
+  const [existingImages, setExistingImages] = useState(
+    [...(initialImages || [])].sort((a, b) => a.display_order - b.display_order)
+  );
+  const [removingId, setRemovingId] = useState(null);
   const [files, setFiles] = useState([]);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -43,7 +58,27 @@ export default function PropertyForm({ existing = null }) {
     setFiles(Array.from(e.target.files));
   };
 
+  const handleRemoveExistingImage = async (image) => {
+    if (!confirm("Remove this photo? This cannot be undone.")) return;
+    setRemovingId(image.id);
+    try {
+      const res = await fetch("/api/delete-property-image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageId: image.id, r2Key: image.r2_key }),
+      });
+      if (!res.ok) throw new Error("Delete failed");
+      setExistingImages((prev) => prev.filter((img) => img.id !== image.id));
+    } catch (err) {
+      console.error("Remove image error:", err);
+      setError("Could not remove that photo. Please try again.");
+    } finally {
+      setRemovingId(null);
+    }
+  };
+
   const uploadPhotos = async (propertyId) => {
+    const startOrder = existingImages.length;
     for (let i = 0; i < files.length; i++) {
       const compressed = await imageCompression(files[i], {
         maxSizeMB: 0.25,
@@ -54,7 +89,7 @@ export default function PropertyForm({ existing = null }) {
       const formData = new FormData();
       formData.append("file", compressed);
       formData.append("propertyId", propertyId);
-      formData.append("displayOrder", String(i));
+      formData.append("displayOrder", String(startOrder + i));
 
       // Calls the API route that pushes to R2 + saves the URL in Supabase.
       // See lib/api-upload-property-image.js — wire this endpoint up when
@@ -266,6 +301,27 @@ export default function PropertyForm({ existing = null }) {
 
         <div className="md:col-span-2">
           <label className={labelClass}>Photos</label>
+
+          {existingImages.length > 0 && (
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-4">
+              {existingImages.map((image) => (
+                <div key={image.id} className="relative group aspect-square rounded-sm overflow-hidden border border-cream/10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={image.image_url} alt="Property" className="w-full h-full object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveExistingImage(image)}
+                    disabled={removingId === image.id}
+                    className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/70 text-cream text-xs flex items-center justify-center hover:bg-red-500/80 transition-colors disabled:opacity-50"
+                    aria-label="Remove photo"
+                  >
+                    {removingId === image.id ? "…" : "✕"}
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
           <input
             type="file"
             accept="image/*"
@@ -274,8 +330,13 @@ export default function PropertyForm({ existing = null }) {
             className="w-full text-sm text-cream/70 file:mr-3 file:py-2 file:px-4 file:rounded-pill file:border-0 file:bg-gold file:text-ink file:font-medium file:cursor-pointer"
           />
           <p className="text-xs text-cream/40 mt-1">
-            Photos are compressed automatically before upload. You can select multiple at once.
+            {existingImages.length > 0
+              ? "New photos are added alongside the ones above — remove any old photo using the ✕ button."
+              : "Photos are compressed automatically before upload. You can select multiple at once."}
           </p>
+          {files.length > 0 && (
+            <p className="text-xs text-gold mt-1">{files.length} new photo(s) selected — uploaded when you save.</p>
+          )}
         </div>
 
         <div className="md:col-span-2 flex items-center gap-3 bg-gold/10 border border-gold/30 rounded-sm px-4 py-3">

@@ -13,7 +13,7 @@ export default function EditPropertyPage() {
     async function load() {
       const { data, error } = await supabase
         .from("properties")
-        .select("*")
+        .select("*, property_images(*)")
         .eq("id", id)
         .single();
       if (!error) setProperty(data);

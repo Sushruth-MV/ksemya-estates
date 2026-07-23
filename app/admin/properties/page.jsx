@@ -16,10 +16,16 @@ export default function AdminPropertiesList() {
     setLoading(true);
     const { data, error } = await supabase
       .from("properties")
-      .select("*")
+      .select("*, property_images(image_url, display_order)")
       .order("created_at", { ascending: false });
     if (!error && data) setProperties(data);
     setLoading(false);
+  }
+
+  function coverImage(property) {
+    const images = property.property_images || [];
+    if (images.length === 0) return null;
+    return [...images].sort((a, b) => a.display_order - b.display_order)[0].image_url;
   }
 
   useEffect(() => {
@@ -65,31 +71,39 @@ export default function AdminPropertiesList() {
           No properties yet. Add your first listing to get started.
         </div>
       ) : (
-        <div className="bg-mist border border-cream/10 rounded-lg overflow-x-auto">
-          <table className="w-full text-sm min-w-[640px]">
-            <thead className="bg-forest text-left text-cream/50">
-              <tr>
-                <th className="px-4 py-3 font-medium">Title</th>
-                <th className="px-4 py-3 font-medium">Type</th>
-                <th className="px-4 py-3 font-medium">Price</th>
-                <th className="px-4 py-3 font-medium">Status</th>
-                <th className="px-4 py-3 font-medium">Featured</th>
-                <th className="px-4 py-3 font-medium text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {properties.map((p) => (
-                <tr key={p.id} className="border-t border-cream/10 text-cream/80 hover:bg-forest/40 transition-colors">
-                  <td className="px-4 py-3 max-w-xs truncate">{p.title}</td>
-                  <td className="px-4 py-3 text-cream/50">{p.type}</td>
-                  <td className="px-4 py-3">{formatPrice(p.price)}</td>
-                  <td className="px-4 py-3 text-cream/50 capitalize">{p.status}</td>
-                  <td className="px-4 py-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {properties.map((p) => {
+            const cover = coverImage(p);
+            return (
+              <div
+                key={p.id}
+                className="bg-mist border border-cream/10 rounded-lg overflow-hidden flex flex-col hover:border-gold/30 transition-colors"
+              >
+                <div className="aspect-video bg-forest relative">
+                  {cover ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={cover} alt={p.title} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-cream/30 text-sm">
+                      No photo
+                    </div>
+                  )}
+                  <span className="absolute top-2 left-2 bg-black/60 text-cream/80 text-xs px-2 py-1 rounded-pill capitalize">
+                    {p.status}
+                  </span>
+                </div>
+
+                <div className="p-4 flex flex-col flex-1">
+                  <h3 className="font-display text-lg text-cream truncate">{p.title}</h3>
+                  <p className="text-xs text-cream/50 mb-2">{p.type}</p>
+                  <p className="text-gold font-semibold mb-3">{formatPrice(p.price)}</p>
+
+                  <div className="flex items-center gap-3 mb-4">
                     <button
                       onClick={() => toggleFeatured(p)}
                       role="switch"
                       aria-checked={p.is_featured}
-                      className={`w-10 h-5 rounded-full relative transition-colors ${
+                      className={`w-10 h-5 rounded-full relative transition-colors shrink-0 ${
                         p.is_featured ? "bg-gold" : "bg-cream/15"
                       }`}
                     >
@@ -99,25 +113,27 @@ export default function AdminPropertiesList() {
                         }`}
                       />
                     </button>
-                  </td>
-                  <td className="px-4 py-3 text-right space-x-3">
+                    <span className="text-xs text-cream/50">Featured</span>
+                  </div>
+
+                  <div className="mt-auto flex items-center justify-between pt-3 border-t border-cream/10">
                     <Link
                       href={`/admin/properties/${p.id}/edit`}
-                      className="link-underline text-gold hover:text-gold-light"
+                      className="link-underline text-gold hover:text-gold-light text-sm"
                     >
                       Edit
                     </Link>
                     <button
                       onClick={() => handleDelete(p)}
-                      className="link-underline text-red-400 hover:text-red-300"
+                      className="link-underline text-red-400 hover:text-red-300 text-sm"
                     >
                       Delete
                     </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
