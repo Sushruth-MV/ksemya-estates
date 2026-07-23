@@ -1,4 +1,4 @@
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import { getSiteSettings } from "@/lib/settings";
 
@@ -10,10 +10,10 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-dm-sans",
+  variable: "--font-montserrat",
   display: "swap",
 });
 
@@ -39,7 +39,7 @@ export default async function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${montserrat.variable}`}>
       <body className="font-body">
         <script
           type="application/ld+json"

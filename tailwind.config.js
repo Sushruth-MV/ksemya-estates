@@ -7,34 +7,36 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Design tokens — Ksemya Estates premium dark identity
+        // Design tokens — Ksemya Estates brand identity (slate/charcoal, not green)
         forest: {
-          DEFAULT: "#0E1310", // primary near-black background
-          light: "#1A231C", // hover / raised state
-          dark: "#080B07", // deepest shadow
+          DEFAULT: "#1C262B", // primary dark slate background
+          light: "#2F3E46", // hover / raised state — brand charcoal
+          dark: "#11181C", // deepest shadow
         },
         bark: {
-          DEFAULT: "#161D18", // secondary section background (alternates with forest)
-          light: "#1E2620",
+          DEFAULT: "#222C31", // secondary section background (alternates with forest)
+          light: "#2A353B",
         },
         mist: {
-          DEFAULT: "#1B2420", // card / glass panel background
-          dark: "#141A16",
+          DEFAULT: "#263137", // card / glass panel background
+          dark: "#1B2429",
         },
         cream: {
-          DEFAULT: "#F3EFE5", // primary text on dark
+          DEFAULT: "#F4EFE6", // primary text on dark
           dim: "#AEB6AB", // muted / secondary text on dark
         },
         gold: {
-          DEFAULT: "#C9A86A", // warm brass accent
-          light: "#DCC08C",
-          dark: "#A3854F",
+          DEFAULT: "#C49A4A", // brand accent
+          light: "#D6B36C",
+          dark: "#9C7935",
         },
-        ink: "#12140F", // dark text used on gold / cream surfaces
+        sage: "#7A8F6A", // brand secondary — used sparingly as a nature accent
+        evergreen: "#2E5A43", // brand secondary — used sparingly as a nature accent
+        ink: "#20292E", // dark text used on gold / cream surfaces
       },
       fontFamily: {
         display: ["var(--font-playfair)", "Georgia", "serif"],
-        body: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
+        body: ["var(--font-montserrat)", "system-ui", "sans-serif"],
       },
       borderRadius: {
         sm: "8px",
