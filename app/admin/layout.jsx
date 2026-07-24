@@ -76,9 +76,15 @@ export default function AdminLayout({ children }) {
             aria-expanded={mobileOpen}
             className="relative w-9 h-9 flex flex-col items-center justify-center gap-1.5"
           >
-            <span className={`block w-6 h-[1.5px] bg-cream transition-transform duration-300 ${mobileOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-            <span className={`block w-6 h-[1.5px] bg-cream transition-opacity duration-300 ${mobileOpen ? "opacity-0" : "opacity-100"}`} />
-            <span className={`block w-6 h-[1.5px] bg-cream transition-transform duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+            <span
+              className={`block w-6 h-[1.5px] bg-cream transition-transform duration-300 ${mobileOpen ? "rotate-45 translate-y-[7px]" : ""}`}
+            />
+            <span
+              className={`block w-6 h-[1.5px] bg-cream transition-opacity duration-300 ${mobileOpen ? "opacity-0" : "opacity-100"}`}
+            />
+            <span
+              className={`block w-6 h-[1.5px] bg-cream transition-transform duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""}`}
+            />
           </button>
         </div>
 
@@ -90,7 +96,9 @@ export default function AdminLayout({ children }) {
                   key={item.href}
                   href={item.href}
                   className={`py-3 border-b border-cream/5 last:border-0 transition-colors ${
-                    pathname === item.href ? "text-gold font-semibold" : "text-cream/80 hover:text-gold"
+                    pathname === item.href
+                      ? "text-gold font-semibold"
+                      : "text-cream/80 hover:text-gold"
                   }`}
                 >
                   {item.label}

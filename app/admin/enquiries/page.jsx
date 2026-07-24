@@ -23,7 +23,7 @@ export default function AdminEnquiriesPage() {
     <div>
       <h1 className="font-display text-3xl text-cream mb-1">Enquiries</h1>
       <p className="text-cream/50 mb-8">
-        Messages submitted through the website's enquiry forms.
+        Messages submitted through the website&apos;s enquiry forms.
       </p>
 
       {loading ? (
@@ -35,7 +35,10 @@ export default function AdminEnquiriesPage() {
       ) : (
         <div className="space-y-4">
           {enquiries.map((e) => (
-            <div key={e.id} className="bg-mist border border-cream/10 rounded-lg p-5 hover:border-gold/30 transition-colors">
+            <div
+              key={e.id}
+              className="bg-mist border border-cream/10 rounded-lg p-5 hover:border-gold/30 transition-colors"
+            >
               <div className="flex items-start justify-between flex-wrap gap-2 mb-2">
                 <div>
                   <p className="font-medium text-cream">{e.name}</p>

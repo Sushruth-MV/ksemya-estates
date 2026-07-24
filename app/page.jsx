@@ -42,9 +42,9 @@ export default async function HomePage() {
             className="mt-6 max-w-xl text-cream/70 text-lg animate-fade-in-up"
             style={{ animationDelay: "160ms" }}
           >
-            Ksemya Estates deals in agricultural land, coffee plantations,
-            and farm lands across Karnataka's hill country — with layout,
-            development, and turnkey housing construction handled end to end.
+            Ksemya Estates deals in agricultural land, coffee plantations, and farm lands across
+            Karnataka&apos;s hill country — with layout, development, and turnkey housing
+            construction handled end to end.
           </p>
           <div
             className="mt-9 flex flex-wrap gap-4 animate-fade-in-up"
@@ -88,7 +88,10 @@ export default async function HomePage() {
               <p className="text-xs uppercase tracking-widest text-gold mb-2">Just In</p>
               <h2 className="font-display text-3xl md:text-4xl text-cream">Recently Listed</h2>
             </div>
-            <Link href="/properties" className="link-underline text-sm text-cream/70 hover:text-gold transition-colors">
+            <Link
+              href="/properties"
+              className="link-underline text-sm text-cream/70 hover:text-gold transition-colors"
+            >
               View all
             </Link>
           </div>
@@ -110,22 +113,21 @@ export default async function HomePage() {
               <div className="border-t border-gold/30 pt-6">
                 <p className="font-display text-4xl text-gold mb-3">Since 2004</p>
                 <p className="text-cream/60 text-sm leading-relaxed">
-                  Working land deals across Karnataka's hill country, long before
-                  it was a destination on anyone's map.
+                  Working land deals across Karnataka&apos;s hill country, long before it was a
+                  destination on anyone&apos;s map.
                 </p>
               </div>
               <div className="border-t border-gold/30 pt-6">
                 <p className="font-display text-4xl text-gold mb-3">Local</p>
                 <p className="text-cream/60 text-sm leading-relaxed">
-                  Every listing is walked, checked, and photographed in person —
-                  not sourced from a broker network.
+                  Every listing is walked, checked, and photographed in person — not sourced from a
+                  broker network.
                 </p>
               </div>
               <div className="border-t border-gold/30 pt-6">
                 <p className="font-display text-4xl text-gold mb-3">Direct</p>
                 <p className="text-cream/60 text-sm leading-relaxed">
-                  You deal with the owner directly — no middlemen, no inflated
-                  commissions.
+                  You deal with the owner directly — no middlemen, no inflated commissions.
                 </p>
               </div>
             </div>
@@ -149,7 +151,8 @@ export default async function HomePage() {
               Your next chapter starts with land.
             </h2>
             <p className="text-cream/70 mb-10 max-w-lg mx-auto">
-              Let's help you find the right piece of land — for growing, building, or holding onto for what's next.
+              Let&apos;s help you find the right piece of land — for growing, building, or holding
+              onto for what&apos;s next.
             </p>
             <Link
               href="/contact"

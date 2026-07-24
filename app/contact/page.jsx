@@ -21,9 +21,10 @@ export default async function ContactPage() {
       <section className="max-w-5xl mx-auto px-5 md:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>
           <p className="text-cream/60 mb-8 leading-relaxed">
-            Have a question about a property, or looking for something
-            specific that isn't listed yet? Send us a message or reach out
-            directly on WhatsApp — we usually respond the same day.
+            Have a question about a property, or looking for something specific that isn&apos;t
+            listed
+            yet? Send us a message or reach out directly on WhatsApp — we usually respond the same
+            day.
           </p>
 
           <ul className="space-y-4 text-sm text-cream/70 mb-8">

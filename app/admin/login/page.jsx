@@ -19,9 +19,7 @@ export default function AdminLoginPage() {
 
     setLoading(false);
     if (error) {
-      setError(
-        "Login failed. Check your email/password, or confirm Supabase Auth is connected."
-      );
+      setError("Login failed. Check your email/password, or confirm Supabase Auth is connected.");
       return;
     }
     router.push("/admin");
@@ -47,7 +45,9 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm text-cream/60 mb-1" htmlFor="email">Email</label>
+            <label className="block text-sm text-cream/60 mb-1" htmlFor="email">
+              Email
+            </label>
             <input
               id="email"
               type="email"
@@ -58,7 +58,9 @@ export default function AdminLoginPage() {
             />
           </div>
           <div>
-            <label className="block text-sm text-cream/60 mb-1" htmlFor="password">Password</label>
+            <label className="block text-sm text-cream/60 mb-1" htmlFor="password">
+              Password
+            </label>
             <input
               id="password"
               type="password"

@@ -20,10 +20,18 @@ export default async function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-9 font-body text-sm text-cream/85">
-          <Link href="/" className="link-underline hover:text-gold transition-colors">Home</Link>
-          <Link href="/properties" className="link-underline hover:text-gold transition-colors">Properties</Link>
-          <Link href="/about" className="link-underline hover:text-gold transition-colors">About Us</Link>
-          <Link href="/contact" className="link-underline hover:text-gold transition-colors">Contact Us</Link>
+          <Link href="/" className="link-underline hover:text-gold transition-colors">
+            Home
+          </Link>
+          <Link href="/properties" className="link-underline hover:text-gold transition-colors">
+            Properties
+          </Link>
+          <Link href="/about" className="link-underline hover:text-gold transition-colors">
+            About Us
+          </Link>
+          <Link href="/contact" className="link-underline hover:text-gold transition-colors">
+            Contact Us
+          </Link>
         </nav>
 
         <a

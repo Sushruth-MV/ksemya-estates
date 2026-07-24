@@ -40,10 +40,7 @@ export default function AdminSettingsPage() {
     setSaved(false);
 
     const { id, updated_at, ...payload } = form;
-    const { error } = await supabase
-      .from("site_settings")
-      .update(payload)
-      .eq("id", true);
+    const { error } = await supabase.from("site_settings").update(payload).eq("id", true);
 
     setSaving(false);
     if (error) {
@@ -61,24 +58,42 @@ export default function AdminSettingsPage() {
     <div>
       <h1 className="font-display text-3xl text-cream mb-1">Business Settings</h1>
       <p className="text-cream/50 mb-8">
-        These details show up across the public website — header, footer, contact page, and About Us.
+        These details show up across the public website — header, footer, contact page, and About
+        Us.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-5 max-w-2xl">
         <div>
           <label className={labelClass}>Business Name</label>
-          <input name="business_name" value={form.business_name} onChange={handleChange} required className={inputClass} />
+          <input
+            name="business_name"
+            value={form.business_name}
+            onChange={handleChange}
+            required
+            className={inputClass}
+          />
         </div>
 
         <div>
           <label className={labelClass}>Tagline</label>
-          <input name="tagline" value={form.tagline} onChange={handleChange} className={inputClass} />
+          <input
+            name="tagline"
+            value={form.tagline}
+            onChange={handleChange}
+            className={inputClass}
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label className={labelClass}>Email</label>
-            <input name="email" type="email" value={form.email} onChange={handleChange} className={inputClass} />
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              className={inputClass}
+            />
           </div>
           <div>
             <label className={labelClass}>WhatsApp / Phone (with country code, no +)</label>
@@ -94,12 +109,24 @@ export default function AdminSettingsPage() {
 
         <div>
           <label className={labelClass}>Business Address</label>
-          <textarea name="address" value={form.address} onChange={handleChange} rows={2} className={inputClass} />
+          <textarea
+            name="address"
+            value={form.address}
+            onChange={handleChange}
+            rows={2}
+            className={inputClass}
+          />
         </div>
 
         <div>
           <label className={labelClass}>About Us</label>
-          <textarea name="about_us" value={form.about_us} onChange={handleChange} rows={10} className={inputClass} />
+          <textarea
+            name="about_us"
+            value={form.about_us}
+            onChange={handleChange}
+            rows={10}
+            className={inputClass}
+          />
           <p className="text-xs text-cream/40 mt-1">
             Shown on the About Us page. Leave a blank line between paragraphs.
           </p>

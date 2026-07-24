@@ -91,9 +91,8 @@ export default function PropertyForm({ existing = null }) {
       formData.append("propertyId", propertyId);
       formData.append("displayOrder", String(startOrder + i));
 
-      // Calls the API route that pushes to R2 + saves the URL in Supabase.
-      // See lib/api-upload-property-image.js — wire this endpoint up when
-      // your R2 keys are added tomorrow.
+      // Pushes the file to R2 and saves its URL in property_images (see
+      // app/api/upload-property-image/route.js).
       await fetch("/api/upload-property-image", {
         method: "POST",
         body: formData,
@@ -132,21 +131,14 @@ export default function PropertyForm({ existing = null }) {
     let propertyId = existing?.id;
 
     if (existing) {
-      const { error } = await supabase
-        .from("properties")
-        .update(payload)
-        .eq("id", existing.id);
+      const { error } = await supabase.from("properties").update(payload).eq("id", existing.id);
       if (error) {
         setError(error.message);
         setSaving(false);
         return;
       }
     } else {
-      const { data, error } = await supabase
-        .from("properties")
-        .insert([payload])
-        .select()
-        .single();
+      const { data, error } = await supabase.from("properties").insert([payload]).select().single();
       if (error) {
         setError(error.message);
         setSaving(false);
@@ -176,7 +168,13 @@ export default function PropertyForm({ existing = null }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div className="md:col-span-2">
           <label className={labelClass}>Title</label>
-          <input name="title" value={form.title} onChange={handleChange} required className={inputClass} />
+          <input
+            name="title"
+            value={form.title}
+            onChange={handleChange}
+            required
+            className={inputClass}
+          />
         </div>
 
         <div className="md:col-span-2">
@@ -211,7 +209,13 @@ export default function PropertyForm({ existing = null }) {
 
         <div>
           <label className={labelClass}>Price (₹)</label>
-          <input name="price" type="number" value={form.price} onChange={handleChange} className={inputClass} />
+          <input
+            name="price"
+            type="number"
+            value={form.price}
+            onChange={handleChange}
+            className={inputClass}
+          />
         </div>
 
         <div>
@@ -221,12 +225,22 @@ export default function PropertyForm({ existing = null }) {
 
         <div>
           <label className={labelClass}>Location</label>
-          <input name="location" value={form.location} onChange={handleChange} className={inputClass} />
+          <input
+            name="location"
+            value={form.location}
+            onChange={handleChange}
+            className={inputClass}
+          />
         </div>
 
         <div>
           <label className={labelClass}>District</label>
-          <input name="district" value={form.district} onChange={handleChange} className={inputClass} />
+          <input
+            name="district"
+            value={form.district}
+            onChange={handleChange}
+            className={inputClass}
+          />
         </div>
 
         <div className="md:col-span-2 pt-2 border-t border-cream/10">
@@ -240,12 +254,22 @@ export default function PropertyForm({ existing = null }) {
 
         <div>
           <label className={labelClass}>Survey / Site Number</label>
-          <input name="survey_number" value={form.survey_number} onChange={handleChange} className={inputClass} />
+          <input
+            name="survey_number"
+            value={form.survey_number}
+            onChange={handleChange}
+            className={inputClass}
+          />
         </div>
 
         <div>
           <label className={labelClass}>Khata Type</label>
-          <select name="khata_type" value={form.khata_type} onChange={handleChange} className={inputClass}>
+          <select
+            name="khata_type"
+            value={form.khata_type}
+            onChange={handleChange}
+            className={inputClass}
+          >
             <option value="">Not specified</option>
             <option value="A">A Khata</option>
             <option value="B">B Khata</option>
@@ -276,7 +300,12 @@ export default function PropertyForm({ existing = null }) {
 
         <div className="md:col-span-2">
           <label className={labelClass}>Nearest Landmark</label>
-          <input name="nearest_landmark" value={form.nearest_landmark} onChange={handleChange} className={inputClass} />
+          <input
+            name="nearest_landmark"
+            value={form.nearest_landmark}
+            onChange={handleChange}
+            className={inputClass}
+          />
         </div>
 
         <label className="md:col-span-2 flex items-center gap-3 bg-forest border border-cream/10 rounded-sm px-4 py-3 cursor-pointer">
@@ -309,9 +338,16 @@ export default function PropertyForm({ existing = null }) {
           {existingImages.length > 0 && (
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-4">
               {existingImages.map((image) => (
-                <div key={image.id} className="relative group aspect-square rounded-sm overflow-hidden border border-cream/10">
+                <div
+                  key={image.id}
+                  className="relative group aspect-square rounded-sm overflow-hidden border border-cream/10"
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={image.image_url} alt="Property" className="w-full h-full object-cover" />
+                  <img
+                    src={image.image_url}
+                    alt="Property"
+                    className="w-full h-full object-cover"
+                  />
                   <button
                     type="button"
                     onClick={() => handleRemoveExistingImage(image)}
@@ -339,7 +375,9 @@ export default function PropertyForm({ existing = null }) {
               : "Photos are compressed automatically before upload. You can select multiple at once."}
           </p>
           {files.length > 0 && (
-            <p className="text-xs text-gold mt-1">{files.length} new photo(s) selected — uploaded when you save.</p>
+            <p className="text-xs text-gold mt-1">
+              {files.length} new photo(s) selected — uploaded when you save.
+            </p>
           )}
         </div>
 

@@ -9,15 +9,14 @@ export default function AdminDashboardHome() {
 
   useEffect(() => {
     async function loadStats() {
-      const [{ count: total }, { count: featured }, { count: enquiries }] =
-        await Promise.all([
-          supabase.from("properties").select("*", { count: "exact", head: true }),
-          supabase
-            .from("properties")
-            .select("*", { count: "exact", head: true })
-            .eq("is_featured", true),
-          supabase.from("enquiries").select("*", { count: "exact", head: true }),
-        ]);
+      const [{ count: total }, { count: featured }, { count: enquiries }] = await Promise.all([
+        supabase.from("properties").select("*", { count: "exact", head: true }),
+        supabase
+          .from("properties")
+          .select("*", { count: "exact", head: true })
+          .eq("is_featured", true),
+        supabase.from("enquiries").select("*", { count: "exact", head: true }),
+      ]);
 
       setStats({
         total: total || 0,
@@ -33,9 +32,7 @@ export default function AdminDashboardHome() {
     <div>
       <h1 className="font-display text-3xl text-cream mb-1">Dashboard</h1>
       <p className="text-cream/50 mb-8">
-        {loading
-          ? "Loading stats..."
-          : "Overview of your listings and enquiries."}
+        {loading ? "Loading stats..." : "Overview of your listings and enquiries."}
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">

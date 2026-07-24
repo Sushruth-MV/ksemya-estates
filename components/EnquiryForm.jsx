@@ -43,7 +43,7 @@ export default function EnquiryForm({ propertyId = null, title = "Send an Enquir
       <div className="text-center py-4">
         <p className="font-display text-lg text-gold mb-1">Thank you</p>
         <p className="text-sm text-cream/60">
-          We've received your enquiry and will get back to you soon.
+          We&apos;ve received your enquiry and will get back to you soon.
         </p>
       </div>
     );
@@ -54,7 +54,9 @@ export default function EnquiryForm({ propertyId = null, title = "Send an Enquir
       <p className="font-display text-lg text-cream">{title}</p>
 
       <div>
-        <label className="block text-sm text-cream/50 mb-1" htmlFor="name">Name</label>
+        <label className="block text-sm text-cream/50 mb-1" htmlFor="name">
+          Name
+        </label>
         <input
           id="name"
           name="name"
@@ -66,7 +68,9 @@ export default function EnquiryForm({ propertyId = null, title = "Send an Enquir
       </div>
 
       <div>
-        <label className="block text-sm text-cream/50 mb-1" htmlFor="phone">Phone</label>
+        <label className="block text-sm text-cream/50 mb-1" htmlFor="phone">
+          Phone
+        </label>
         <input
           id="phone"
           name="phone"
@@ -79,7 +83,9 @@ export default function EnquiryForm({ propertyId = null, title = "Send an Enquir
       </div>
 
       <div>
-        <label className="block text-sm text-cream/50 mb-1" htmlFor="email">Email (optional)</label>
+        <label className="block text-sm text-cream/50 mb-1" htmlFor="email">
+          Email (optional)
+        </label>
         <input
           id="email"
           name="email"
@@ -91,7 +97,9 @@ export default function EnquiryForm({ propertyId = null, title = "Send an Enquir
       </div>
 
       <div>
-        <label className="block text-sm text-cream/50 mb-1" htmlFor="message">Message</label>
+        <label className="block text-sm text-cream/50 mb-1" htmlFor="message">
+          Message
+        </label>
         <textarea
           id="message"
           name="message"
@@ -105,7 +113,8 @@ export default function EnquiryForm({ propertyId = null, title = "Send an Enquir
 
       {status === "error" && (
         <p className="text-sm text-red-400">
-          Something went wrong. Please fill in your name and phone, or try the WhatsApp button instead.
+          Something went wrong. Please fill in your name and phone, or try the WhatsApp button
+          instead.
         </p>
       )}
 

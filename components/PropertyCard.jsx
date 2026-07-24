@@ -9,10 +9,7 @@ function formatPrice(price) {
 }
 
 export default function PropertyCard({ property }) {
-  const image =
-    property.images?.[0] ||
-    property.property_images?.[0]?.image_url ||
-    null;
+  const image = property.images?.[0] || property.property_images?.[0]?.image_url || null;
 
   return (
     <Link
@@ -44,11 +41,10 @@ export default function PropertyCard({ property }) {
       </div>
 
       <div className="p-5">
-        <p className="font-display text-lg text-cream leading-snug mb-1">
-          {property.title}
-        </p>
+        <p className="font-display text-lg text-cream leading-snug mb-1">{property.title}</p>
         <p className="text-sm text-cream/50 mb-3">
-          {property.location}{property.district ? `, ${property.district}` : ""} · {property.area}
+          {property.location}
+          {property.district ? `, ${property.district}` : ""} · {property.area}
         </p>
         <p className="font-medium text-gold">{formatPrice(property.price)}</p>
       </div>

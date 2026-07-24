@@ -1,13 +1,6 @@
 import { NextResponse } from "next/server";
 import { deleteFromR2 } from "@/lib/r2Client";
-import { createClient } from "@supabase/supabase-js";
-
-// Service-role client, same pattern as upload-property-image — deleting the
-// R2 object requires server-side credentials that can never reach the browser.
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co",
-  process.env.SUPABASE_SERVICE_ROLE_KEY || "placeholder-service-key"
-);
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function POST(request) {
   try {

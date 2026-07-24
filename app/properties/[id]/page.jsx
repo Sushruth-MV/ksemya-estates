@@ -27,10 +27,7 @@ export default async function PropertyDetailPage({ params }) {
   if (!property) return notFound();
   const settings = await getSiteSettings();
 
-  const images =
-    property.images ||
-    property.property_images?.map((img) => img.image_url) ||
-    [];
+  const images = property.images || property.property_images?.map((img) => img.image_url) || [];
   const embedUrl = youTubeEmbedUrl(property.youtube_url);
 
   return (
@@ -77,11 +74,10 @@ export default async function PropertyDetailPage({ params }) {
             <span className="inline-block bg-gold text-ink text-xs font-semibold px-3 py-1 rounded-pill mb-4">
               {property.type}
             </span>
-            <h1 className="font-display text-3xl md:text-4xl text-cream mb-2">
-              {property.title}
-            </h1>
+            <h1 className="font-display text-3xl md:text-4xl text-cream mb-2">{property.title}</h1>
             <p className="text-cream/50 mb-4">
-              {property.location}{property.district ? `, ${property.district}` : ""} · {property.area}
+              {property.location}
+              {property.district ? `, ${property.district}` : ""} · {property.area}
             </p>
             <p className="font-display text-2xl text-gold mb-6">
               {formatPrice(property.price)}

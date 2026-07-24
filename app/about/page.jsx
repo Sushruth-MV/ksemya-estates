@@ -42,15 +42,21 @@ export default async function AboutPage() {
             <h2 className="font-display text-2xl md:text-3xl text-cream mb-6">What We Deal In</h2>
             <ul className="grid grid-cols-1 sm:grid-cols-3 gap-5 text-sm text-cream/60">
               <li className="bg-forest rounded-lg p-5 border border-cream/10 hover:border-gold/50 hover:-translate-y-1 transition-all duration-300">
-                <p className="font-display text-lg font-medium text-gold mb-2">Coffee Plantations</p>
+                <p className="font-display text-lg font-medium text-gold mb-2">
+                  Coffee Plantations
+                </p>
                 Shaded Arabica and Robusta plantations, with or without existing infrastructure.
               </li>
               <li className="bg-forest rounded-lg p-5 border border-cream/10 hover:border-gold/50 hover:-translate-y-1 transition-all duration-300">
-                <p className="font-display text-lg font-medium text-gold mb-2">Agricultural &amp; Farm Land</p>
+                <p className="font-display text-lg font-medium text-gold mb-2">
+                  Agricultural &amp; Farm Land
+                </p>
                 Red-soil and irrigated parcels suited for pepper, areca, and mixed cropping.
               </li>
               <li className="bg-forest rounded-lg p-5 border border-cream/10 hover:border-gold/50 hover:-translate-y-1 transition-all duration-300">
-                <p className="font-display text-lg font-medium text-gold mb-2">Layout, Development &amp; Construction</p>
+                <p className="font-display text-lg font-medium text-gold mb-2">
+                  Layout, Development &amp; Construction
+                </p>
                 Layout planning, land development, and turnkey housing construction projects.
               </li>
             </ul>

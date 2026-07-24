@@ -35,9 +35,7 @@ export default function AdminPropertiesList() {
   const toggleFeatured = async (property) => {
     // Optimistic update so the switch feels instant
     setProperties((prev) =>
-      prev.map((p) =>
-        p.id === property.id ? { ...p, is_featured: !p.is_featured } : p
-      )
+      prev.map((p) => (p.id === property.id ? { ...p, is_featured: !p.is_featured } : p))
     );
     const { error } = await supabase
       .from("properties")

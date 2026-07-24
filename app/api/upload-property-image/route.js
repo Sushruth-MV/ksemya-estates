@@ -1,15 +1,6 @@
 import { NextResponse } from "next/server";
 import { uploadToR2 } from "@/lib/r2Client";
-import { createClient } from "@supabase/supabase-js";
-
-// Uses the service-role key (server-side only, never exposed to the browser)
-// so this route can write to property_images even though only the owner's
-// session created the parent property. Add SUPABASE_SERVICE_ROLE_KEY
-// tomorrow alongside the other env vars.
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co",
-  process.env.SUPABASE_SERVICE_ROLE_KEY || "placeholder-service-key"
-);
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function POST(request) {
   try {
