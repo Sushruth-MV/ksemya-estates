@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
+import { SkeletonListRow } from "@/components/Skeleton";
 
 export default function AdminEnquiriesPage() {
   const [enquiries, setEnquiries] = useState([]);
@@ -27,7 +28,11 @@ export default function AdminEnquiriesPage() {
       </p>
 
       {loading ? (
-        <p className="text-cream/50">Loading...</p>
+        <div className="space-y-4">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <SkeletonListRow key={i} />
+          ))}
+        </div>
       ) : enquiries.length === 0 ? (
         <div className="bg-mist border border-cream/10 rounded-lg p-10 text-center text-cream/60">
           No enquiries yet.

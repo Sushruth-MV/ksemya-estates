@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
+import { SkeletonPropertyCard } from "@/components/Skeleton";
 
 function formatPrice(price) {
   if (!price) return "—";
@@ -45,7 +46,11 @@ export default function AdminPropertiesList() {
   };
 
   const handleDelete = async (property) => {
-    if (!confirm(`Delete "${property.title}"? This also removes its photos from storage and cannot be undone.`))
+    if (
+      !confirm(
+        `Delete "${property.title}"? This also removes its photos from storage and cannot be undone.`
+      )
+    )
       return;
     const res = await fetch("/api/delete-property", {
       method: "POST",
@@ -68,7 +73,11 @@ export default function AdminPropertiesList() {
       </div>
 
       {loading ? (
-        <p className="text-cream/50">Loading...</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <SkeletonPropertyCard key={i} />
+          ))}
+        </div>
       ) : properties.length === 0 ? (
         <div className="bg-mist border border-cream/10 rounded-lg p-10 text-center text-cream/60">
           No properties yet. Add your first listing to get started.

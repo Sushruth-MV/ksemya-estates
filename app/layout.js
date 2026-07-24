@@ -1,6 +1,7 @@
 import { Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import { getSiteSettings } from "@/lib/settings";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default async function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
         />
         {children}
+        <FloatingWhatsApp phone={settings.phone} />
       </body>
     </html>
   );

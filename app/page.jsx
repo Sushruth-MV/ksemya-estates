@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import FeaturedCarousel from "@/components/FeaturedCarousel";
 import PropertyCard from "@/components/PropertyCard";
 import Reveal from "@/components/Reveal";
+import StatCounter from "@/components/StatCounter";
 import Link from "next/link";
 import { getFeaturedProperties, getAllProperties } from "@/lib/data";
 
@@ -111,7 +112,9 @@ export default async function HomePage() {
           <Reveal>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               <div className="border-t border-gold/30 pt-6">
-                <p className="font-display text-4xl text-gold mb-3">Since 2004</p>
+                <p className="font-display text-4xl text-gold mb-3">
+                  <StatCounter target={20} suffix="+ Years" />
+                </p>
                 <p className="text-cream/60 text-sm leading-relaxed">
                   Working land deals across Karnataka&apos;s hill country, long before it was a
                   destination on anyone&apos;s map.

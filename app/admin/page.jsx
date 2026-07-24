@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
+import { SkeletonBlock } from "@/components/Skeleton";
 
 export default function AdminDashboardHome() {
   const [stats, setStats] = useState({ total: 0, featured: 0, enquiries: 0 });
@@ -38,15 +39,27 @@ export default function AdminDashboardHome() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
         <div className="bg-mist border border-cream/10 rounded-lg p-6 border-t-2 border-t-gold hover:-translate-y-1 transition-transform duration-300">
           <p className="text-xs uppercase tracking-widest text-gold mb-2">Total Properties</p>
-          <p className="font-display text-4xl text-cream">{stats.total}</p>
+          {loading ? (
+            <SkeletonBlock className="h-10 w-16" />
+          ) : (
+            <p className="font-display text-4xl text-cream">{stats.total}</p>
+          )}
         </div>
         <div className="bg-mist border border-cream/10 rounded-lg p-6 border-t-2 border-t-gold hover:-translate-y-1 transition-transform duration-300">
           <p className="text-xs uppercase tracking-widest text-gold mb-2">Currently Featured</p>
-          <p className="font-display text-4xl text-cream">{stats.featured}</p>
+          {loading ? (
+            <SkeletonBlock className="h-10 w-16" />
+          ) : (
+            <p className="font-display text-4xl text-cream">{stats.featured}</p>
+          )}
         </div>
         <div className="bg-mist border border-cream/10 rounded-lg p-6 border-t-2 border-t-gold hover:-translate-y-1 transition-transform duration-300">
           <p className="text-xs uppercase tracking-widest text-gold mb-2">Total Enquiries</p>
-          <p className="font-display text-4xl text-cream">{stats.enquiries}</p>
+          {loading ? (
+            <SkeletonBlock className="h-10 w-16" />
+          ) : (
+            <p className="font-display text-4xl text-cream">{stats.enquiries}</p>
+          )}
         </div>
       </div>
 

@@ -1,11 +1,21 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PropertyCard from "@/components/PropertyCard";
+import { getSavedProperties, SAVED_PROPERTIES_EVENT } from "@/lib/savedProperties";
 
 export default function PropertiesGrid({ initialProperties }) {
   const [type, setType] = useState("all");
   const [location, setLocation] = useState("all");
   const [sort, setSort] = useState("newest");
+  const [savedOnly, setSavedOnly] = useState(false);
+  const [savedIds, setSavedIds] = useState([]);
+
+  useEffect(() => {
+    const sync = () => setSavedIds(getSavedProperties());
+    sync();
+    window.addEventListener(SAVED_PROPERTIES_EVENT, sync);
+    return () => window.removeEventListener(SAVED_PROPERTIES_EVENT, sync);
+  }, []);
 
   const locations = useMemo(() => {
     const set = new Set(initialProperties.map((p) => p.location).filter(Boolean));
@@ -16,10 +26,11 @@ export default function PropertiesGrid({ initialProperties }) {
     let list = [...initialProperties];
     if (type !== "all") list = list.filter((p) => p.type === type);
     if (location !== "all") list = list.filter((p) => p.location === location);
+    if (savedOnly) list = list.filter((p) => savedIds.includes(p.id));
     if (sort === "price-asc") list.sort((a, b) => (a.price || 0) - (b.price || 0));
     if (sort === "price-desc") list.sort((a, b) => (b.price || 0) - (a.price || 0));
     return list;
-  }, [initialProperties, type, location, sort]);
+  }, [initialProperties, type, location, sort, savedOnly, savedIds]);
 
   return (
     <div>
@@ -57,6 +68,22 @@ export default function PropertiesGrid({ initialProperties }) {
           <option value="price-asc">Price: Low to High</option>
           <option value="price-desc">Price: High to Low</option>
         </select>
+
+        <button
+          type="button"
+          onClick={() => setSavedOnly((v) => !v)}
+          aria-pressed={savedOnly}
+          className={`flex items-center gap-1.5 rounded-pill px-4 py-2.5 text-sm border transition-colors ${
+            savedOnly
+              ? "bg-gold text-ink border-gold"
+              : "bg-mist text-cream/80 border-cream/15 hover:border-gold/40"
+          }`}
+        >
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+            <path d="M12 21s-7.5-4.6-10.1-9.1C.3 8.8 1.6 5 5.2 4.2 7.6 3.6 9.8 4.7 12 7c2.2-2.3 4.4-3.4 6.8-2.8 3.6.8 4.9 4.6 3.3 7.7C19.5 16.4 12 21 12 21Z" />
+          </svg>
+          Saved{savedIds.length > 0 ? ` (${savedIds.length})` : ""}
+        </button>
       </div>
 
       {filtered.length === 0 ? (

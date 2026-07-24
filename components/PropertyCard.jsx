@@ -1,4 +1,11 @@
+"use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import {
+  isPropertySaved,
+  toggleSavedProperty,
+  SAVED_PROPERTIES_EVENT,
+} from "@/lib/savedProperties";
 
 function formatPrice(price) {
   if (!price) return "Price on request";
@@ -10,6 +17,20 @@ function formatPrice(price) {
 
 export default function PropertyCard({ property }) {
   const image = property.images?.[0] || property.property_images?.[0]?.image_url || null;
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    setSaved(isPropertySaved(property.id));
+    const sync = () => setSaved(isPropertySaved(property.id));
+    window.addEventListener(SAVED_PROPERTIES_EVENT, sync);
+    return () => window.removeEventListener(SAVED_PROPERTIES_EVENT, sync);
+  }, [property.id]);
+
+  const handleToggleSave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSaved(toggleSavedProperty(property.id));
+  };
 
   return (
     <Link
@@ -38,6 +59,24 @@ export default function PropertyCard({ property }) {
             Negotiable
           </span>
         )}
+        <button
+          type="button"
+          onClick={handleToggleSave}
+          aria-label={saved ? "Remove from saved properties" : "Save this property"}
+          aria-pressed={saved}
+          className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur flex items-center justify-center hover:scale-110 transition-transform duration-200"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill={saved ? "#C9A86A" : "none"}
+            stroke={saved ? "#C9A86A" : "#F3EFE5"}
+            strokeWidth="2"
+          >
+            <path d="M12 21s-7.5-4.6-10.1-9.1C.3 8.8 1.6 5 5.2 4.2 7.6 3.6 9.8 4.7 12 7c2.2-2.3 4.4-3.4 6.8-2.8 3.6.8 4.9 4.6 3.3 7.7C19.5 16.4 12 21 12 21Z" />
+          </svg>
+        </button>
       </div>
 
       <div className="p-5">

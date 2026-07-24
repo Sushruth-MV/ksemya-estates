@@ -78,6 +78,34 @@ body {
   left: 125%;
 }
 
+/* Success checkmark — see components/EnquiryForm.jsx */
+@keyframes checkmarkPop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.checkmark-circle {
+  animation: checkmarkPop 0.5s ease forwards;
+}
+@keyframes checkmarkDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.checkmark-path {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: checkmarkDraw 0.5s ease forwards 0.25s;
+}
+
 /* Scroll-reveal target state — see components/Reveal.jsx */
 .reveal {
   opacity: 0;

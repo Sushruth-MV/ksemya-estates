@@ -40,7 +40,25 @@ export default function EnquiryForm({ propertyId = null, title = "Send an Enquir
 
   if (status === "sent") {
     return (
-      <div className="text-center py-4">
+      <div className="text-center py-6">
+        <svg
+          className="checkmark-circle mx-auto mb-4"
+          width="56"
+          height="56"
+          viewBox="0 0 56 56"
+          fill="none"
+        >
+          <circle cx="28" cy="28" r="26" stroke="#C9A86A" strokeWidth="2.5" />
+          <path
+            className="checkmark-path"
+            d="M17 29L24.5 36.5L39 20"
+            stroke="#C9A86A"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </svg>
         <p className="font-display text-lg text-gold mb-1">Thank you</p>
         <p className="text-sm text-cream/60">
           We&apos;ve received your enquiry and will get back to you soon.

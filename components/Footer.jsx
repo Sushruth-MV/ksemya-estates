@@ -43,8 +43,7 @@ export default async function Footer() {
           <p className="text-xs text-gold mb-2 tracking-widest uppercase">{settings.tagline}</p>
           <p className="text-sm text-cream/60 leading-relaxed">
             Agricultural land, coffee plantations, and farm lands across Karnataka&apos;s hill
-            country —
-            with layout, development, and turnkey housing construction services.
+            country — with layout, development, and turnkey housing construction services.
           </p>
         </div>
 

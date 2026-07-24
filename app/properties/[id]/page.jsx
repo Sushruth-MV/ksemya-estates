@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EnquiryForm from "@/components/EnquiryForm";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PhotoLightbox from "@/components/PhotoLightbox";
 import { getPropertyById } from "@/lib/data";
 import { getSiteSettings } from "@/lib/settings";
 import { propertyEnquiryMessage } from "@/lib/whatsapp";
@@ -36,25 +37,7 @@ export default async function PropertyDetailPage({ params }) {
       <section className="max-w-6xl mx-auto px-5 md:px-8 py-14 grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2 space-y-8">
           {/* Photo gallery */}
-          <div className="grid grid-cols-2 gap-3">
-            {images.length > 0 ? (
-              images.map((src, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={i}
-                  src={src}
-                  alt={`${property.title} photo ${i + 1}`}
-                  className={`rounded-lg object-cover w-full border border-cream/10 ${
-                    i === 0 ? "col-span-2 aspect-video" : "aspect-square"
-                  }`}
-                />
-              ))
-            ) : (
-              <div className="col-span-2 aspect-video bg-mist border border-cream/10 rounded-lg flex items-center justify-center text-cream/30">
-                No photos yet
-              </div>
-            )}
-          </div>
+          <PhotoLightbox images={images} title={property.title} />
 
           {/* Video */}
           {embedUrl && (
