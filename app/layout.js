@@ -3,6 +3,11 @@ import "./globals.css";
 import { getSiteSettings } from "@/lib/settings";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
+// Content (properties, site settings) is managed live via the admin panel,
+// so every page must always fetch fresh data — never serve Next.js's
+// cached fetch results from a previous request.
+export const dynamic = "force-dynamic";
+
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
