@@ -22,7 +22,7 @@ export default async function HomePage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1653775173951-061c5bf1a4f5?w=1600&q=80&auto=format&fit=crop')",
+              "url('https://images.unsplash.com/photo-1747854805840-9be7d5e360e6?w=1600&q=80&auto=format&fit=crop')",
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-forest via-forest/90 to-forest/40" />
