@@ -45,9 +45,14 @@ export default function AdminPropertiesList() {
   };
 
   const handleDelete = async (property) => {
-    if (!confirm(`Delete "${property.title}"? This cannot be undone.`)) return;
-    const { error } = await supabase.from("properties").delete().eq("id", property.id);
-    if (!error) setProperties((prev) => prev.filter((p) => p.id !== property.id));
+    if (!confirm(`Delete "${property.title}"? This also removes its photos from storage and cannot be undone.`))
+      return;
+    const res = await fetch("/api/delete-property", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ propertyId: property.id }),
+    });
+    if (res.ok) setProperties((prev) => prev.filter((p) => p.id !== property.id));
   };
 
   return (
